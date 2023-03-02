@@ -1,7 +1,3 @@
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
-# from counter.models import Counter, PCR_data, PCR_data_past,BTC_Data
-from django.http import HttpResponse
 import json
 import requests
 from bs4 import BeautifulSoup
