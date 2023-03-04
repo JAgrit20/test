@@ -39,7 +39,7 @@ def Telegram_data():
     nifty_val = data['filtered']['data'][0]['PE']['underlyingValue']
     print("nifty_val:", nifty_val)
 
-    for i in range(len(stockcode)):
+    for i in range(2):
             try:
                 stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
                     str(stockcode[i])
@@ -55,6 +55,7 @@ def Telegram_data():
                 response = subprocess.check_output(curl_command, shell=True)
 
                 data = json.loads(response.decode('utf-8'))
+                print("dataa", data)
                 soup = BeautifulSoup(data.text, 'html.parser')
                 data_array = soup.find(id='responseDiv').getText()
 
