@@ -41,7 +41,7 @@ def Telegram_data():
 
     for i in range(2):
             try:
-                stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
+                stock_url = 'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
                     str(stockcode[i])
                 print(stock_url)
                 
