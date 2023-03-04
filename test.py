@@ -54,8 +54,8 @@ def Telegram_data():
 
                     response = subprocess.check_output(curl_command, shell=True)
 
-                    print("resssaa", response)    
-                    data = response.json()
+                    print("resss", response)    
+                    data = json.loads(response)
                     print("dataa", data)    
                 except Exception as e:
                     print("ERROR 60: "+str(e))
