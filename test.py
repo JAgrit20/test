@@ -83,8 +83,11 @@ def Telegram_data():
 
 	print("count", count)
 	if(count >= 40):
-		Send_high()
+		print("Count is high")
+		# Send_high()
 	if(count <= 10):
-		Send_low()
+		print("Count is low")
+		
+		# Send_low()
 
 Telegram_data()
