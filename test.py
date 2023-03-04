@@ -40,52 +40,52 @@ def Telegram_data():
     print("nifty_val:", nifty_val)
 
     # for i in range(len(stockcode)):
-            try:
-                stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
-                    str(stockcode[i])
-                print(stock_url)
+    #         try:
+    #             stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
+    #                 str(stockcode[i])
+    #             print(stock_url)
                 
-                headers = {
-                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
-                response = requests.get(stock_url, headers=headers)
-                # response
-                soup = BeautifulSoup(response.text, 'html.parser')
-                data_array = soup.find(id='responseDiv').getText()
+    #             headers = {
+    #                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
+    #             response = requests.get(stock_url, headers=headers)
+    #             # response
+    #             soup = BeautifulSoup(response.text, 'html.parser')
+    #             data_array = soup.find(id='responseDiv').getText()
 
-                y = json.loads(data_array)
+    #             y = json.loads(data_array)
 
-                latest_price = (y['data'][-1]['lastPrice'])
-                latest_price = latest_price.replace(',', '')
-                print("latest", latest_price)
-                latest_price = float(latest_price)
+    #             latest_price = (y['data'][-1]['lastPrice'])
+    #             latest_price = latest_price.replace(',', '')
+    #             print("latest", latest_price)
+    #             latest_price = float(latest_price)
 
-                # name = "SUNPHARMA"
+    #             # name = "SUNPHARMA"
 
-                url = f'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol={stockcode[i]}&smeFlag=0&itpFlag=0'
-                # headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
+    #             url = f'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol={stockcode[i]}&smeFlag=0&itpFlag=0'
+    #             # headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
 
-                soup = BeautifulSoup(requests.get(
-                    url, headers=headers).content, 'html.parser')
-                data = json.loads(soup.select_one('#responseDiv').text)
+    #             soup = BeautifulSoup(requests.get(
+    #                 url, headers=headers).content, 'html.parser')
+    #             data = json.loads(soup.select_one('#responseDiv').text)
 
-                # uncomment this to print all data:
-                # print(json.dumps(data, indent=4))
-                vwap = (data['data'][0]['averagePrice'])
-                vwap = vwap.replace(',', '')
-                vwap = float(vwap)
-                # print("v",type(vwap))
-                # print("latest_price",type(latest_price))
-                vwap = float(vwap)
+    #             # uncomment this to print all data:
+    #             # print(json.dumps(data, indent=4))
+    #             vwap = (data['data'][0]['averagePrice'])
+    #             vwap = vwap.replace(',', '')
+    #             vwap = float(vwap)
+    #             # print("v",type(vwap))
+    #             # print("latest_price",type(latest_price))
+    #             vwap = float(vwap)
 
-                print('vwap:', data['data'][0]['averagePrice'])
+    #             print('vwap:', data['data'][0]['averagePrice'])
 
-                if(latest_price > vwap):
-                    count = count + 1
-                # print("yes big")
-                # else:
-                #   # print("small")
-            except Exception as e:
-                print("ERROR : "+str(e))
+    #             if(latest_price > vwap):
+    #                 count = count + 1
+    #             # print("yes big")
+    #             # else:
+    #             #   # print("small")
+    #         except Exception as e:
+    #             print("ERROR : "+str(e))
 
     print("count", count)
     if(count >= 40):
