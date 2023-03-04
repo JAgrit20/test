@@ -20,17 +20,19 @@ def Telegram_data():
                  'HINDUNILVR', 'HDFC', 'ICICIBANK', 'ITC', 'INDUSINDBK', 'INFY', 'JSWSTEEL', 'KOTAKBANK', 'LT', 'M&M', 'MARUTI', 'NTPC', 'NESTLEIND', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBILIFE', 'SBIN', 'SUNPHARMA', 'TCS', 'TATACONSUM', 'TATAMOTORS', 'TATASTEEL', 'TECHM', 'TITAN', 'UPL', 'ULTRACEMCO', 'WIPRO']
     # print(stockcode)
     url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
-
+    print("Telegram_data 23")
     headers = {
         
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
         # 'accept-encoding': 'gzip, deflate, br',
         # 'accept-language': 'en-US,en;q=0.9'
     }
-    response = requests.get(url).content
+    response = requests.get(url, headers=headers).content
     data = json.loads(response.decode('utf-8'))
     nifty_val = 0
     count = 0
+    print("Telegram_data 34")
+    
     nifty_val = data['filtered']['data'][0]['PE']['underlyingValue']
     print("nifty_val", nifty_val)
 
@@ -39,10 +41,11 @@ def Telegram_data():
                 stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
                     str(stockcode[i])
                 print(stock_url)
+                print("Telegram_data 44")
                 
                 headers = {
                     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
-                response = requests.get(stock_url)
+                response = requests.get(stock_url, headers=headers)
                 # response
                 soup = BeautifulSoup(response.text, 'html.parser')
                 data_array = soup.find(id='responseDiv').getText()
@@ -53,6 +56,7 @@ def Telegram_data():
                 latest_price = latest_price.replace(',', '')
                 print("latest", latest_price)
                 latest_price = float(latest_price)
+                print("Telegram_data 59")
 
                 # name = "SUNPHARMA"
 
@@ -60,7 +64,7 @@ def Telegram_data():
                 # headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
 
                 soup = BeautifulSoup(requests.get(
-                    url).content, 'html.parser')
+                    url, headers=headers).content, 'html.parser')
                 data = json.loads(soup.select_one('#responseDiv').text)
 
                 # uncomment this to print all data:
@@ -68,6 +72,7 @@ def Telegram_data():
                 vwap = (data['data'][0]['averagePrice'])
                 vwap = vwap.replace(',', '')
                 vwap = float(vwap)
+                print("Telegram_data 75")
                 # print("v",type(vwap))
                 # print("latest_price",type(latest_price))
                 vwap = float(vwap)
