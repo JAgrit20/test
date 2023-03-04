@@ -12,9 +12,11 @@ __request_headers = {
         'Cache-Control':'no-cache',    
     }
 try:
+    print("om")
     nse_url = 'https://www.nseindia.com/market-data/top-gainers-loosers'
     url = 'https://www.nseindia.com/api/live-analysis-variations?index=gainers'
     resp = requests.get(url=nse_url, headers=__request_headers)
+    print("yes 18")
     if resp.ok:
         req_cookies = dict(nsit=resp.cookies['nsit'], nseappid=resp.cookies['nseappid'], ak_bmsc=resp.cookies['ak_bmsc'])
         tresp = requests.get(url=url, headers=__request_headers, cookies=req_cookies)
