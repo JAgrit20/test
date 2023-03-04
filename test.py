@@ -28,7 +28,7 @@ def Telegram_data():
         # 'accept-language': 'en-US,en;q=0.9'
     }
     response = requests.get(url, headers=headers).content
-    data = json.loads(response.decode('utf-8'))
+    data = json.loads(response)
     nifty_val = 0
     count = 0
     print("Telegram_data 34")
