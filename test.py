@@ -20,7 +20,7 @@ def Telegram_data():
         # 'accept-language': 'en-US,en;q=0.9'
     }
     response = requests.get(url, headers=headers).content
-    data = json.loads(response)
+    data = json.loads(response.decode('utf-8'))
     nifty_val = 0
     count = 0
     nifty_val = data['filtered']['data'][0]['PE']['underlyingValue']
