@@ -19,21 +19,21 @@ def Telegram_data():
     stockcode = ['ADANIENT', 'ADANIPORTS', 'APOLLOHOSP', 'ASIANPAINT', 'AXISBANK', 'BAJAJ-AUTO', 'BAJFINANCE', 'BAJAJFINSV', 'BPCL', 'BHARTIARTL', 'BRITANNIA', 'CIPLA', 'COALINDIA', 'DIVISLAB', 'DRREDDY', 'EICHERMOT', 'GRASIM', 'HCLTECH', 'HDFCBANK', 'HDFCLIFE', 'HEROMOTOCO', 'HINDALCO',
                  'HINDUNILVR', 'HDFC', 'ICICIBANK', 'ITC', 'INDUSINDBK', 'INFY', 'JSWSTEEL', 'KOTAKBANK', 'LT', 'M&M', 'MARUTI', 'NTPC', 'NESTLEIND', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBILIFE', 'SBIN', 'SUNPHARMA', 'TCS', 'TATACONSUM', 'TATAMOTORS', 'TATASTEEL', 'TECHM', 'TITAN', 'UPL', 'ULTRACEMCO', 'WIPRO']
     # print(stockcode)
-    url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
-    print("Telegram_data 23")
-    headers = {
+    # url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
+    # print("Telegram_data 23")
+    # headers = {
         
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-        # 'accept-encoding': 'gzip, deflate, br',
-        # 'accept-language': 'en-US,en;q=0.9'
-    }
-    response = requests.get(url, headers=headers).content
-    data = json.loads(response.decode('utf-8'))
+    #     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+    #     # 'accept-encoding': 'gzip, deflate, br',
+    #     # 'accept-language': 'en-US,en;q=0.9'
+    # }
+    # response = requests.get(url, headers=headers).content
+    # data = json.loads(response.decode('utf-8'))
     nifty_val = 0
     count = 0
     print("Telegram_data 34")
     
-    nifty_val = data['filtered']['data'][0]['PE']['underlyingValue']
+    # nifty_val = data['filtered']['data'][0]['PE']['underlyingValue']
     print("nifty_val", nifty_val)
 
     for i in range(len(stockcode)):
