@@ -27,7 +27,7 @@ def Telegram_data():
         # 'accept-encoding': 'gzip, deflate, br',
         # 'accept-language': 'en-US,en;q=0.9'
     }
-    response = requests.get(url, headers=headers).content
+    response = requests.get(url).content
     data = json.loads(response.decode('utf-8'))
     nifty_val = 0
     count = 0
@@ -42,7 +42,7 @@ def Telegram_data():
                 
                 headers = {
                     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
-                response = requests.get(stock_url, headers=headers)
+                response = requests.get(stock_url)
                 # response
                 soup = BeautifulSoup(response.text, 'html.parser')
                 data_array = soup.find(id='responseDiv').getText()
@@ -57,10 +57,10 @@ def Telegram_data():
                 # name = "SUNPHARMA"
 
                 url = f'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol={stockcode[i]}&smeFlag=0&itpFlag=0'
-                headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
+                # headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
 
                 soup = BeautifulSoup(requests.get(
-                    url, headers=headers).content, 'html.parser')
+                    url).content, 'html.parser')
                 data = json.loads(soup.select_one('#responseDiv').text)
 
                 # uncomment this to print all data:
