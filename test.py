@@ -55,9 +55,9 @@ def Telegram_data():
                     response = subprocess.check_output(curl_command, shell=True)
 
                     data = json.loads(response)
-                    print("dataa", data)
+                    print("dataa", data)    
                 except Exception as e:
-                    print("ERROR : "+str(e))
+                    print("ERROR 60: "+str(e))
 
                 # soup = BeautifulSoup(data.text, 'html.parser')
                 # data_array = soup.find(id='responseDiv').getText()
