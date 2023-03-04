@@ -39,53 +39,59 @@ def Telegram_data():
     nifty_val = data['filtered']['data'][0]['PE']['underlyingValue']
     print("nifty_val:", nifty_val)
 
-    # for i in range(len(stockcode)):
-    #         try:
-    #             stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
-    #                 str(stockcode[i])
-    #             print(stock_url)
+    for i in range(len(stockcode)):
+            try:
+                stock_url = 'https://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + \
+                    str(stockcode[i])
+                print(stock_url)
                 
-    #             headers = {
-    #                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
-    #             response = requests.get(stock_url, headers=headers)
-    #             # response
-    #             soup = BeautifulSoup(response.text, 'html.parser')
-    #             data_array = soup.find(id='responseDiv').getText()
+                # headers = {
+                #     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
+                # response = requests.get(stock_url, headers=headers)
+                # response
 
-    #             y = json.loads(data_array)
+                curl_command = f'curl {stock_url} -H "authority: beta.nseindia.com" -H "cache-control: max-age=0" -H "dnt: 1" -H "upgrade-insecure-requests: 1" -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36" -H "sec-fetch-user: ?1" -H "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9" -H "sec-fetch-site: none" -H "sec-fetch-mode: navigate" -H "accept-encoding: gzip, deflate, br" -H "accept-language: en-US,en;q=0.9,hi;q=0.8" --compressed'
 
-    #             latest_price = (y['data'][-1]['lastPrice'])
-    #             latest_price = latest_price.replace(',', '')
-    #             print("latest", latest_price)
-    #             latest_price = float(latest_price)
+                response = subprocess.check_output(curl_command, shell=True)
 
-    #             # name = "SUNPHARMA"
+                data = json.loads(response.decode('utf-8'))
+                soup = BeautifulSoup(data.text, 'html.parser')
+                data_array = soup.find(id='responseDiv').getText()
 
-    #             url = f'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol={stockcode[i]}&smeFlag=0&itpFlag=0'
-    #             # headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
+                y = json.loads(data_array)
 
-    #             soup = BeautifulSoup(requests.get(
-    #                 url, headers=headers).content, 'html.parser')
-    #             data = json.loads(soup.select_one('#responseDiv').text)
+                latest_price = (y['data'][-1]['lastPrice'])
+                latest_price = latest_price.replace(',', '')
+                print("latest", latest_price)
+                latest_price = float(latest_price)
 
-    #             # uncomment this to print all data:
-    #             # print(json.dumps(data, indent=4))
-    #             vwap = (data['data'][0]['averagePrice'])
-    #             vwap = vwap.replace(',', '')
-    #             vwap = float(vwap)
-    #             # print("v",type(vwap))
-    #             # print("latest_price",type(latest_price))
-    #             vwap = float(vwap)
+                # name = "SUNPHARMA"
 
-    #             print('vwap:', data['data'][0]['averagePrice'])
+                # url = f'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol={stockcode[i]}&smeFlag=0&itpFlag=0'
+                # # headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
 
-    #             if(latest_price > vwap):
-    #                 count = count + 1
-    #             # print("yes big")
-    #             # else:
-    #             #   # print("small")
-    #         except Exception as e:
-    #             print("ERROR : "+str(e))
+                # soup = BeautifulSoup(requests.get(
+                #     url, headers=headers).content, 'html.parser')
+                # data = json.loads(soup.select_one('#responseDiv').text)
+
+                # # uncomment this to print all data:
+                # # print(json.dumps(data, indent=4))
+                # vwap = (data['data'][0]['averagePrice'])
+                # vwap = vwap.replace(',', '')
+                # vwap = float(vwap)
+                # # print("v",type(vwap))
+                # # print("latest_price",type(latest_price))
+                # vwap = float(vwap)
+
+                # print('vwap:', data['data'][0]['averagePrice'])
+
+                # if(latest_price > vwap):
+                #     count = count + 1
+                # # print("yes big")
+                # else:
+                #   # print("small")
+            except Exception as e:
+                print("ERROR : "+str(e))
 
     print("count", count)
     if(count >= 40):
